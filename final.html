@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Surprise ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+overflow:hidden;
+}
+
+.container{
+text-align:center;
+color:white;
+}
+
+button{
+padding:16px 40px;
+font-size:22px;
+border:none;
+border-radius:40px;
+background:white;
+color:#ff4081;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.08);
+}
+
+#loadingBox{
+display:none;
+margin-top:30px;
+}
+
+.progress{
+width:320px;
+height:18px;
+background:white;
+border-radius:20px;
+overflow:hidden;
+margin:20px auto;
+}
+
+.bar{
+width:0%;
+height:100%;
+background:#ff4081;
+transition:.3s;
+}
+
+#status{
+font-size:22px;
+margin-top:15px;
+}
+
+#finalMessage{
+display:none;
+animation:zoom 1.5s;
+}
+
+#finalMessage h1{
+font-size:55px;
+margin-bottom:20px;
+}
+
+#finalMessage p{
+font-size:24px;
+margin-bottom:30px;
+}
+
+@keyframes zoom{
+
+from{
+opacity:0;
+transform:scale(.5);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+.heart{
+position:absolute;
+font-size:28px;
+animation:float 6s linear infinite;
+opacity:.8;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<button id="startBtn" onclick="startSurprise()">
+💖 Final Surprise 💖
+</button>
+
+<div id="loadingBox">
+
+<h2>Loading Your Surprise...</h2>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<div id="status">
+Finding Something Special...
+</div>
+
+</div>
+
+<div id="finalMessage">
+
+<h1>❤️ YOU ❤️</h1>
+
+<p>
+The Biggest Gift Was Always You.
+</p>
+
+<p>
+Thank You For Visiting My Little World.
+</p>
+
+<p>
+Made Especially For You ❤️
+</p>
+
+<button onclick="location.href='index.html'">
+🔄 Replay Surprise
+</button>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+<script>
+
+function startSurprise(){
+
+document.getElementById("startBtn").style.display="none";
+
+document.getElementById("loadingBox").style.display="block";
+
+let bar=document.getElementById("bar");
+
+let status=document.getElementById("status");
+
+let width=0;
+
+let messages=[
+"Finding Something Special...",
+"Still Searching...",
+"Almost There...",
+"Wait...",
+"Just One Second...",
+"Found It ❤️"
+];
+
+let i=0;
+
+let interval=setInterval(function(){
+
+width+=2;
+
+bar.style.width=width+"%";
+
+if(width==20) status.innerHTML=messages[1];
+if(width==40) status.innerHTML=messages[2];
+if(width==60) status.innerHTML=messages[3];
+if(width==80) status.innerHTML=messages[4];
+if(width==98) status.innerHTML=messages[5];
+
+if(width>=100){
+
+clearInterval(interval);
+
+document.getElementById("loadingBox").style.display="none";
+
+document.getElementById("finalMessage").style.display="block";
+
+confetti({
+particleCount:250,
+spread:180,
+origin:{y:.6}
+});
+
+createHearts();
+
+}
+
+},60);
+
+}
+
+function createHearts(){
+
+setInterval(function(){
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.fontSize=(20+Math.random()*30)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+
+},300);
+
+}
+
+</script>
+
+</body>
+</html>

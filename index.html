@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Special Surprise</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    font-family:Arial, sans-serif;
+}
+
+a{
+    padding:15px 35px;
+    background:#fff;
+    color:#ff4081;
+    text-decoration:none;
+    font-size:24px;
+    font-weight:bold;
+    border-radius:50px;
+    box-shadow:0 0 15px rgba(0,0,0,.3);
+    transition:.3s;
+}
+
+a:hover{
+    transform:scale(1.08);
+}
+
+#message{
+    display:none;
+    position:absolute;
+    top:38%;                 /* Message upar aa jayega */
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    color:white;
+    font-size:36px;
+    font-weight:600;
+    font-style:italic;
+    line-height:1.5;
+    text-shadow:0 0 20px rgba(255,255,255,.9);
+    animation:zoom 1s ease;
+}
+
+#nextBtn{
+    display:none;
+    margin-top:40px;
+    padding:15px 35px;
+    background:white;
+    color:#ff4081;
+    text-decoration:none;
+    font-size:22px;
+    font-weight:bold;
+    border-radius:50px;
+    box-shadow:0 0 15px rgba(255,255,255,.7);
+    transition:0.3s;
+}
+
+#nextBtn:hover{
+    transform:scale(1.08);
+}
+#message span{
+    display:block;
+    font-size:18px;
+    color:#ffe6f0;
+    margin-top:10px;
+    letter-spacing:1px;
+}
+
+@keyframes zoom{
+    from{
+        transform:scale(0);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+#nextBtn{
+    display:none;
+    padding:15px 35px;
+    font-size:20px;
+    border:none;
+    border-radius:40px;
+    background:white;
+    color:#ff4081;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+#choices{
+    display:none;
+    margin-top:25px;
+}
+
+.choice{
+    display:none;
+    width:260px;
+    margin:15px auto;
+    padding:15px;
+    font-size:20px;
+    border:none;
+    border-radius:40px;
+    background:white;
+    color:#ff4081;
+    cursor:pointer;
+    transition:.4s;
+
+    opacity:0;
+    transform:translateY(20px);
+}
+
+.show{
+    display:block;
+    animation:fadeUp .7s forwards;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.choice:hover{
+    transform:scale(1.08);
+}
+</style>
+
+</head>
+<body>
+
+<a href="#" onclick="surprise()">🎁 Click Here</a>
+
+<div id="message">
+    💖 This One's For You, Himani 💖
+    <span>Made with lots of love ❤️</span>
+
+    <br><br>
+
+    <button id="nextBtn" onclick="showButtons()">
+        ❤️ Aage Badhe? ❤️
+    </button>
+
+    <div id="choices">
+
+<button class="choice" id="btn1" onclick="window.location.href='gift.html'">
+🎁 Open Your Gift
+</button>
+
+<button class="choice" id="btn2" onclick="window.location.href='letter.html'">
+💌 Read My Letter
+</button>
+
+<button class="choice" id="btn3" onclick="window.location.href='final.html'">
+💖 Final Surprise
+</button>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+<script>
+function surprise(){
+
+    document.querySelector("a").style.display="none";
+
+    var duration = 4000;
+    var end = Date.now() + duration;
+
+    (function frame(){
+
+        confetti({
+            particleCount:8,
+            angle:60,
+            spread:80,
+            origin:{x:0}
+        });
+
+        confetti({
+            particleCount:8,
+            angle:120,
+            spread:80,
+            origin:{x:1}
+        });
+
+        if(Date.now() < end){
+            requestAnimationFrame(frame);
+        }
+
+    })();
+
+    setTimeout(function(){
+
+    document.getElementById("message").style.display="block";
+
+    setTimeout(function(){
+        document.getElementById("nextBtn").style.display="inline-block";
+    },1000);
+
+},800);
+
+}
+function showButtons(){
+
+    document.getElementById("nextBtn").style.display="none";
+
+    document.getElementById("choices").style.display="block";
+
+    setTimeout(function(){
+        document.getElementById("btn1").classList.add("show");
+    },500);
+
+    setTimeout(function(){
+        document.getElementById("btn2").classList.add("show");
+    },1000);
+
+    setTimeout(function(){
+        document.getElementById("btn3").classList.add("show");
+    },1500);
+
+}
+</script>
+
+</body>
+</html>
